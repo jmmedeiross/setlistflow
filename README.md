@@ -2,6 +2,10 @@
 
 [![Validate SetlistFlow](https://github.com/jmmedeiross/setlistflow/actions/workflows/ci.yml/badge.svg)](https://github.com/jmmedeiross/setlistflow/actions/workflows/ci.yml)
 
+[Abrir demonstração pública](https://setlistflow-jmmedeiross.onrender.com/)
+
+A demonstração é de consulta, com dados fictícios. O plano gratuito pode demorar para responder após um período de inatividade. Para montar e editar seus próprios repertórios, execute a versão local.
+
 Planejamento de shows com cálculo de duração, versões de palco e roteiros aprovados. Construído em **C# / ASP.NET Core, SQLite e JavaScript**, com 29 verificações automatizadas de domínio, integração e navegador.
 
 **Estudo de caso independente:** Yunk Vino é o artista de referência do catálogo demonstrativo. O briefing é simulado; não houve solicitação, contratação, parceria ou aprovação do artista ou da equipe. Eventos e instruções de palco são fictícios. O projeto não distribui áudios, letras, fotografias ou capas.

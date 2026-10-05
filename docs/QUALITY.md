@@ -28,4 +28,6 @@ Campos das faixas atualizavam o estado apenas no evento change, deixando o botã
 
 ## Próximas melhorias de qualidade
 
+A primeira execução no GitHub falhou antes de iniciar qualquer etapa: o serviço registrou erro interno e indisponibilidade de executor hospedado. A configuração seguinte usa a imagem padrão `windows-2022`, fixa a versão do ambiente e cancela execuções antigas do mesmo grupo. A execução local aprovada não substitui a confirmação do resultado no GitHub; consulte o histórico do workflow.
+
 Medir acessibilidade com ferramentas dedicadas e testar outras famílias de navegador. Autenticação e permissões precisam ser verificadas quando implementadas. A imagem Docker é validada pela implantação da demonstração no Render.
