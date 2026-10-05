@@ -1,0 +1,22 @@
+name: Validate SetlistFlow
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: dotnet build src/SetlistFlow.Api/SetlistFlow.Api.csproj -c Release
+      - run: dotnet run --project tests/SetlistFlow.Tests/SetlistFlow.Tests.csproj -c Release
+      - run: python tests/integration.py
+      - run: node --check src/SetlistFlow.Api/wwwroot/app.js

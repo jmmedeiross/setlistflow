@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SetlistFlow · Planejamento de shows</title><link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script></head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="/" aria-label="SetlistFlow início"><span class="brand-icon">≋</span> Setlist<span>Flow</span></a>
+    <p class="section-label">WORKSPACE MUSICAL</p>
+    <div class="artist"><span class="avatar">YV</span><div><strong>Yunk Vino</strong><small>Artista de referência</small></div></div>
+    <div class="sidebar-title"><h2>Apresentações</h2><button id="new-show" class="icon-btn" aria-label="Nova apresentação">＋</button></div>
+    <nav id="shows" aria-label="Apresentações"></nav>
+    <div class="sidebar-bottom"><span class="demo-dot"></span><strong>Estudo de caso independente</strong><p>Briefing simulado. Sem vínculo ou aprovação do artista. Eventos e sinais de palco fictícios.</p><a href="https://github.com/jmmedeiross" target="_blank" rel="noopener noreferrer">Um projeto de João Medeiros ↗</a></div>
+  </aside>
+  <main>
+    <header class="topbar"><div><span class="eyebrow">SETLIST / PRODUÇÃO</span><h1>Planejamento do show</h1></div><div class="top-actions"><button id="stage" class="secondary" disabled>↗ Modo palco</button><button id="export" class="secondary" disabled>Exportar aprovado</button></div></header>
+    <p id="notice" class="notice" role="status" aria-live="polite"></p>
+    <section id="loading" class="empty">Carregando seu workspace…</section>
+    <div id="workspace" hidden>
+      <section class="hero">
+        <div class="hero-copy"><span class="tag">REPERTÓRIO EM CONSTRUÇÃO</span><label class="sr-only" for="show-name">Nome da apresentação</label><input id="show-name" maxlength="120" class="show-name" aria-label="Nome da apresentação"><p>Do primeiro sinal à última faixa.<br>Um roteiro para toda a equipe.</p><div class="budget"><label>Tempo do show <span><input id="limit" type="number" min="1" max="240" aria-label="Tempo do show em minutos"> min</span></label><label>Margem de segurança <span><input id="margin" type="number" min="0" max="239" aria-label="Margem de segurança em minutos"> min</span></label></div></div>
+        <div class="hero-timing"><span class="eyebrow">DURAÇÃO PLANEJADA</span><strong id="total">00:00</strong><span id="remaining" class="remaining"></span><meter id="budget-meter" min="0" max="100" value="0" aria-label="Uso do tempo disponível"></meter><small id="budget-caption"></small></div>
+      </section>
+      <div class="metrics"><div><span>FAIXAS NO SET</span><strong id="track-count">0</strong></div><div><span>INTROS + PAUSAS</span><strong id="extra-time">00:00</strong></div><div><span>VERSÕES DE PALCO</span><strong id="live-count">0</strong><small id="estimates"></small></div></div>
+      <div class="editor-grid">
+        <section class="setlist"><div class="section-heading"><div><span class="eyebrow">01 / SEQUÊNCIA</span><h2>Seu repertório</h2></div><span id="revision-label" class="muted"></span></div><p class="helper">A ordem é sua. Ajuste versões, pausas e sinais para o palco.</p><ol id="set-items"></ol><div id="empty-set" class="empty" hidden>Seu show começa com uma faixa.<br>Adicione uma música do catálogo ao lado.</div></section>
+        <aside class="catalog"><div class="section-heading"><div><span class="eyebrow">02 / ACERVO</span><h2>Catálogo</h2></div><button id="new-track" class="icon-btn light" aria-label="Cadastrar faixa">＋</button></div><label class="sr-only" for="search">Buscar faixa ou álbum</label><input id="search" type="search" placeholder="Buscar faixa ou álbum…"><div id="catalog-items"></div><p class="helper source-note">Durações de gravação consultadas no Spotify em 05/10/2026. Versões ao vivo são estimativas até a revisão da produção.</p></aside>
+      </div>
+      <section class="history-panel"><div class="section-heading"><div><span class="eyebrow">03 / REVISÕES</span><h2>O roteiro certo, na hora certa.</h2></div><span id="approved-status" class="pill"></span></div><p class="helper">Editar o rascunho preserva a versão aprovada. Modo palco e exportação sempre usam o roteiro aprovado.</p><div id="history"></div></section>
+      <footer class="savebar"><div><strong id="save-status"></strong><small id="save-caption"></small></div><div class="save-actions"><button id="reload" class="secondary">Recarregar</button><button id="save" class="secondary">Salvar rascunho</button><button id="approve" class="primary">Aprovar roteiro ↗</button></div></footer>
+    </div>
+  </main>
+  <dialog id="track-dialog"><form id="track-form"><span class="eyebrow">CATÁLOGO</span><h2>Adicionar uma faixa</h2><label>Título<input name="title" required maxlength="150"></label><label>Álbum / projeto<input name="album" maxlength="100"></label><label>Duração da gravação (mm:ss)<input name="duration" required placeholder="03:15" pattern="[0-9]{1,2}:[0-5][0-9]"></label><label>Fonte HTTPS (opcional)<input name="source" type="url" placeholder="https://…" maxlength="500"></label><p class="helper">Inclua apenas metadados. Não envie áudio, letras ou capas.</p><div class="dialog-actions"><button type="button" id="cancel-track" class="secondary">Cancelar</button><button class="primary" type="submit">Cadastrar</button></div></form></dialog>
+  <dialog id="stage-dialog" class="stage-dialog"><div class="stage-header"><span id="stage-revision" class="eyebrow"></span><button id="close-stage" class="secondary">Fechar</button></div><p class="stage-kicker">AGORA NO PALCO</p><h2 id="stage-title"></h2><div class="stage-detail"><span id="stage-duration"></span><span id="stage-position"></span></div><p id="stage-cue" class="stage-cue"></p><div class="stage-next"><small>A SEGUIR</small><strong id="stage-next"></strong></div><div class="stage-controls"><button id="stage-prev" class="secondary">← Anterior</button><button id="stage-next-btn" class="primary">Próxima faixa →</button></div><p class="helper">Avanço manual. Os tempos são planejados; não há detecção de execução do áudio.</p></dialog>
+  <dialog id="revision-dialog"><div class="section-heading"><h2 id="revision-title"></h2><button id="close-revision" class="secondary">Fechar</button></div><div id="revision-body"></div></dialog>
+  <section id="print-view" aria-hidden="true"></section>
+</body></html>
