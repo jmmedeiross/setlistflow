@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: setlistflow-jmmedeiross
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    envVars:
+      - key: SETLISTFLOW_READ_ONLY
+        value: "true"
+      - key: SETLISTFLOW_DB
+        value: /data/setlistflow.db

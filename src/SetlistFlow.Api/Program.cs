@@ -3,6 +3,8 @@ using SetlistFlow.Core;
 
 SQLitePCL.Batteries_V2.Init();
 var builder = WebApplication.CreateBuilder(args);
+if (int.TryParse(Environment.GetEnvironmentVariable("PORT"), out var platformPort) && platformPort is > 0 and < 65536)
+    builder.WebHost.UseUrls($"http://0.0.0.0:{platformPort}");
 var dbPath = Environment.GetEnvironmentVariable("SETLISTFLOW_DB") ?? Path.Combine(builder.Environment.ContentRootPath, "data", "setlistflow.db");
 builder.Services.AddSingleton(new Repository(dbPath));
 var app = builder.Build();

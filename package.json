@@ -1,0 +1,8 @@
+{
+  "name": "setlistflow-browser-tests",
+  "private": true,
+  "type": "module",
+  "scripts": { "test:e2e": "playwright test" },
+  "engines": { "node": ">=20" },
+  "devDependencies": { "@playwright/test": "1.63.0" }
+}

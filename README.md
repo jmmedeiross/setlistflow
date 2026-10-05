@@ -2,7 +2,7 @@
 
 [![Validate SetlistFlow](https://github.com/jmmedeiross/setlistflow/actions/workflows/ci.yml/badge.svg)](https://github.com/jmmedeiross/setlistflow/actions/workflows/ci.yml)
 
-Planejamento de shows com cálculo de duração, versões de palco e roteiros aprovados. Construído em **C# / ASP.NET Core, SQLite e JavaScript**, com 23 verificações automatizadas de domínio e integração.
+Planejamento de shows com cálculo de duração, versões de palco e roteiros aprovados. Construído em **C# / ASP.NET Core, SQLite e JavaScript**, com 29 verificações automatizadas de domínio, integração e navegador.
 
 **Estudo de caso independente:** Yunk Vino é o artista de referência do catálogo demonstrativo. O briefing é simulado; não houve solicitação, contratação, parceria ou aprovação do artista ou da equipe. Eventos e instruções de palco são fictícios. O projeto não distribui áudios, letras, fotografias ou capas.
 
@@ -54,11 +54,14 @@ dotnet build src/SetlistFlow.Api -c Release
 dotnet run --project tests/SetlistFlow.Tests -c Release
 python tests/integration.py
 node --check src/SetlistFlow.Api/wwwroot/app.js
+npm ci --ignore-scripts
+npx playwright install chromium
+npm run test:e2e
 ```
 
 O executável de testes de domínio usa asserções em C# e retorna código de erro se alguma falhar. São **14 cenários de domínio**. O Python usa apenas a biblioteca padrão e executa **9 testes de integração** contra uma instância temporária da API e um banco temporário. Nenhum teste chama o Spotify ou outros serviços externos.
 
-Os fluxos de navegador foram verificados manualmente: limite de tempo, aprovação, preservação do aprovado após uma edição, conflito entre duas sessões, adição/remoção, reordenação e modo palco. Eles não são anunciados como testes de navegador automatizados. Veja [plano e evidências de qualidade](docs/QUALITY.md).
+Seis testes com Playwright verificam os fluxos de navegador, incluindo conflitos entre duas sessões, snapshots aprovados, reordenação, geração de PDF e demonstração de consulta em um viewport de celular. As instâncias usam bancos temporários e não acessam perfis ou sessões pessoais. O CI publica relatórios, rastros de falha e o PDF gerado como artefatos. Veja [plano e evidências de qualidade](docs/QUALITY.md).
 
 ## Docker
 
@@ -73,7 +76,7 @@ Para uma demonstração pública de consulta em um banco novo:
 docker run --rm -p 5187:8080 -e SETLISTFLOW_READ_ONLY=true -v setlistflow-demo:/data setlistflow
 ```
 
-O Dockerfile foi preparado, mas a imagem ainda não foi executada neste ambiente. A publicação em hospedagem externa não faz parte desta entrega.
+O Dockerfile é utilizado para a demonstração no Render. A configuração está em `render.yaml`: plano Free, endpoint de saúde `/api/health` e modo de consulta. Em hospedagem, a variável `PORT` define a porta de escuta. O banco da demonstração tem dados fictícios e pode ser recriado quando o serviço reinicia; não exige disco pago.
 
 ## Regras demonstráveis
 

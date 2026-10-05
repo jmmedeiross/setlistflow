@@ -6,7 +6,9 @@
 
 9 testes de integração: catálogo inicial e health; edição preservando o aprovado; versão desatualizada no salvamento e aprovação; rejeição de aprovação acima do limite; exclusão lógica preservando snapshot; metadados do cliente normalizados; entrada inválida/nula e recurso inexistente; persistência após reiniciar e bloqueio de mutações no modo de consulta; duas escritas simultâneas com uma resposta 200 e outra 409.
 
-Resultados locais: **14/14 cenários de domínio e 9/9 testes de integração aprovados**; compilação sem avisos e sintaxe JavaScript válida. Os testes usam banco temporário e não enviam informações para serviços externos.
+Seis testes Playwright verificam limite de tempo e aprovação; preservação do snapshot aprovado; conflito entre duas sessões; adição/remoção e reordenação; exportação do aprovado e geração de PDF; demonstração de consulta em viewport de celular, sem transbordamento horizontal e com bloqueio de escritas na API.
+
+Resultados locais: **14/14 cenários de domínio, 9/9 testes de integração e 6/6 testes de navegador aprovados**; compilação sem avisos e sintaxe JavaScript válida. Os testes usam bancos temporários e não enviam informações para serviços externos. O PDF é gerado com Chromium em modo de impressão; a janela de impressão do sistema operacional não é automatizada.
 
 ## Verificação de navegador
 
@@ -26,4 +28,4 @@ Campos das faixas atualizavam o estado apenas no evento change, deixando o botã
 
 ## Próximas melhorias de qualidade
 
-Automatizar os fluxos de navegador no CI, medir acessibilidade com ferramentas dedicadas e testar a imagem Docker. Autenticação e permissões precisam ser verificadas quando implementadas.
+Medir acessibilidade com ferramentas dedicadas e testar outras famílias de navegador. Autenticação e permissões precisam ser verificadas quando implementadas. A imagem Docker é validada pela implantação da demonstração no Render.
